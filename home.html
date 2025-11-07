@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Meta tags básicas -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Dashboard</title>
+
+    <link href="components/styles/bootstrap.min.css" rel="stylesheet"><link href="styles/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script> 
+    <!--<link rel="stylesheet" href="components/styles/styles.css">-->
+</head>
+
+<body class="bg-light">
+    <!-- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
+        <div class="container">
+            
+            <a class="navbar-brand fw-bold" href="#">Bem Vindo(a)</a>            
+            <button class="btn btn-danger rounded-circle p-2 ms-auto">
+
+                <i data-feather="log-out"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Espaçamento para a navbar fixa -->
+    <div class="mt-5 pt-3"></div>
+    
+    <!-- Conteúdo principal -->
+    <main class="container my-4">
+        <div class="row g-4">
+            <!-- Card 1 - Cadastrar Novo Aluno -->
+            <div class="col-md-6 col-lg-4">
+                <a href="cadastrar-aluno.html" class="text-decoration-none">
+                    <div class="card bg-primary text-white h-100 border-0 shadow-sm hover-card">
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                            <div class="icon-circle mb-3">
+                                <i data-feather="user-plus" class="feather-lg"></i>
+                            </div>
+                            <h5 class="card-title text-uppercase fw-bold">CADASTRAR</h5>
+                            <p class="card-title text-uppercase fw-bold">NOVO ALUNO</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Card 2 - Área do Aluno -->
+            <div class="col-md-6 col-lg-4">
+                <a href="area-aluno.html" class="text-decoration-none">
+                    <div class="card bg-primary text-white h-100 border-0 shadow-sm hover-card">
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                            <i data-feather="users" class="feather-lg mb-3"></i>
+                            <h5 class="card-title text-uppercase fw-bold">ÁREA</h5>
+                            <p class="card-title text-uppercase fw-bold">DO</p>
+                            <p class="card-title text-uppercase fw-bold">ALUNO</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+<!-- Card 3 - Agenda -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card bg-primary text-white h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <i data-feather="calendar" class="feather-lg mb-3"></i>
+                        <h5 class="card-title text-uppercase fw-bold">AGENDA</h5>
+                        <p class="card-text small">em manutenção</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4 - Manutenção -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card bg-secondary text-white h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
+                        <h5 class="card-title text-uppercase fw-bold">EM MANUTENÇÃO</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 5 - Manutenção -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card bg-secondary text-white h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
+                        <h5 class="card-title text-uppercase fw-bold">EM MANUTENÇÃO</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 - Emitir Relatório -->
+            <div class="col-md-6 col-lg-4">
+                <a href="emitir-relatorio.html" class="text-decoration-none">
+                    <div class="card bg-primary text-white h-100 border-0 shadow-sm hover-card">
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                            <div class="icon-circle mb-3">
+                                <i data-feather="file-text" class="feather-lg"></i>
+                            </div>
+                            <h5 class="card-title text-uppercase fw-bold">EMITIR</h5>
+                            <p class="card-title text-uppercase fw-bold">RELATÓRIO</p>
+                            <p class="card-title text-uppercase fw-bold">ALUNO</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+</div>
+    </main>
+
+    <!-- Bootstrap JS Bundle com Popper -->
+    <script src="components/scripts/bootstrap.bundle.min.js"></script>
+    
+    <!-- Inicializar ícones Feather -->
+    <script>
+        feather.replace();
+    </script>
+    
+    <!-- Script personalizado -->
+    <script src="script.js"></script>
+</body>
+</html>
