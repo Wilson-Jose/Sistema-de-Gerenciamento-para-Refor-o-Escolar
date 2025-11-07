@@ -16,7 +16,7 @@ public class LoginInterceptorAppConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(logininterceptor).excludePathPatterns("/login",
-			"/logar","error","/cadastroProf");
+			"/logar","error","/cadastroProf","/horarioProf");
 	}
 	
 }
