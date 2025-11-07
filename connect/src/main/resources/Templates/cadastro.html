@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Cadastro</title>
+    <style>
+        /* NOTA: Em um projeto real, este CSS seria colocado em um 
+           arquivo .css separado (ex: "estilos.css") e importado 
+           nas duas páginas, evitando duplicação. 
+           Mas para simplificar, ele está copiado aqui.
+        */
+        
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container principal do formulário */
+        .form-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box; /* Garante que padding não afete a largura */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* Estilo para os grupos de formulário (label + input) */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Garante que padding não afete a largura total */
+        }
+
+        /* Estilo dos botões */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745; /* Cor verde para cadastro */
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Link para "Fazer Login" */
+        .links-uteis {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .links-uteis a {
+            color: #007bff;
+            text-decoration: none;
+            display: block; /* Faz o link ocupar uma linha */
+            margin-top: 10px;
+        }
+
+        .links-uteis a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        
+        <form id="cadastro-form" method="post">
+            <h2>Cadastro</h2>
+            <div class="input-group">
+                <label for="cadastro-nome">Nome Completo</label>
+                <input type="text" id="cadastro-nome" name="nome_Professor" required>
+            </div>
+            <div class="input-group">
+                <label for="cadastro-email">Email</label>
+                <input type="text" id="cadastro-email" name="email_Professor" required>
+            </div>
+			<div class="input-group">
+			    <label for="cadastro-email">CPF</label>
+			    <input type="text" id="cadastro-email" name="cpf_Professor" required>
+			</div>
+			<div class="input-group">
+			    <label for="cadastro-email">telefone</label>
+			    <input type="text" id="cadastro-email" name="telefone_Professor" required>
+			</div>
+            <div class="input-group">
+                <label for="cadastro-senha">Senha</label>
+                <input type="text" id="cadastro-senha" name="senha_Professor" required>
+            </div>
+            <button type="submit">Criar Conta</button>
+            <div class="links-uteis">
+                <a href="login.html">Já tem uma conta? Faça login</a>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>
