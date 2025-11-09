@@ -2,16 +2,15 @@ package com.connect.connect.controller;
 
 import java.io.UnsupportedEncodingException;
 
-// Removed unused import: javax.naming.Binding
 
-import org.springframework.beans.factory.annotation.Autowired; // Added this import
+
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping; // This is now used
-// Removed unused import: org.springframework.web.bind.annotation.RequestMapping;
-// Removed unused import: org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping; 
+
 
 import com.connect.connect.model.Professor;
 import com.connect.connect.repository.RepositorioProfessor;
@@ -59,11 +58,18 @@ public class LoginController {
 		}
 	
 	
+	@GetMapping("/sairProf")
+	public String sairDaTelaLoginProfessor(HttpServletResponse response) throws UnsupportedEncodingException {
+
+		CookieService.setCookie(response, "professorId", "", 0);   
+		CookieService.setCookie(response, "instituicaoId", "", 0); 
+			
+		return "redirect:/"; 
+	}
 	
 	
 	
-	
-	// cadastro
+
 	@GetMapping("/cadastroProf")
 	public String cadastro() {
 		return "cadastro";
