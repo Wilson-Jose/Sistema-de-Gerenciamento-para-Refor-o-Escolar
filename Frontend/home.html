@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Meta tags básicas -->
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
         <div class="container">
             
-            <a class="navbar-brand fw-bold" href="#">Bem Vindo(a)</a>            
+            <a class="navbar-brand fw-bold" href="#">Bem Vindo(a)<span th:text="${nome}"></span></a>            
             <button class="btn btn-danger rounded-circle p-2 ms-auto">
 
                 <i data-feather="log-out"></i>
@@ -63,8 +63,7 @@
                 <div class="card bg-primary text-white h-100 border-0 shadow-sm hover-card">
                     <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
                         <i data-feather="calendar" class="feather-lg mb-3"></i>
-                        <h5 class="card-title text-uppercase fw-bold">AGENDA</h5>
-                        <p class="card-text small">em manutenção</p>
+                        <h5 class="card-title text-uppercase fw-bold" ref="/horarioProf">AGENDA</h5>
                     </div>
                 </div>
             </div>

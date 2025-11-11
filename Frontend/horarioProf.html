@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+</head>
+
+<body class="bg-light">
+    <<!-- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
+        <div class="container">
+            
+            <a class="navbar-brand fw-bold" href="#">Bem Vindo(a)<span th:text="${nome}"></span></a>            
+                <button action="/index" class="btn btn-danger rounded-pill px-4 fw-bold">Voltar</button>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Espaçamento para a navbar fixa -->
+    <div class="mt-5 pt-3"></div>
+
+    <main class="container my-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">Agenda</h2>
+            </div>
+            <div class="card-body">
+                <div id="calendar" class="mb-4"></div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-primary">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Cadastrar Novo Horário</h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/horarioProf" method="POST" th:object="${horario}">
+                                    <!-- Campo para nome do evento -->
+                                    <div class="mb-3">
+                                        <label for="nomeEvento" class="form-label">Nome do Evento</label>
+                                        <input type="text" class="form-control" id="nomeEvento" th:field="*{nomeEvento}"
+                                            placeholder="Ex: Aula de Matemática" />
+                                        <span class="error" th:if="${#fields.hasErrors('nomeEvento')}"
+                                            th:errors="*{nomeEvento}"></span>
+                                    </div>
+
+                                    <!-- Seleção do dia da semana -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Dia da Semana</label>
+                                        <select class="form-select" id="diaSemana" th:field="*{diaSemana}">
+                                            <option value="">Selecione...</option>
+                                            <option value="Segunda-feira">Segunda-feira</option>
+                                            <option value="Terça-feira">Terça-feira</option>
+                                            <option value="Quarta-feira">Quarta-feira</option>
+                                            <option value="Quinta-feira">Quinta-feira</option>
+                                            <option value="Sexta-feira">Sexta-feira</option>
+                                            <option value="Sábado">Sábado</option>
+                                            <option value="Domingo">Domingo</option>
+                                        </select>
+                                        <span class="error" th:if="${#fields.hasErrors('diaSemana')}"
+                                            th:errors="*{diaSemana}"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Hora de Início</label>
+                                        <input type="time" class="form-control" id="horaInicio"
+                                            th:field="*{horaInicio}" />
+                                        <span class="error" th:if="${#fields.hasErrors('horaInicio')}"
+                                            th:errors="*{horaInicio}"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Hora de Fim</label>
+                                        <input type="time" class="form-control" id="horaFim" th:field="*{horaFim}" />
+                                        <span class="error" th:if="${#fields.hasErrors('horaFim')}"
+                                            th:errors="*{horaFim}"></span>
+                                    </div>
+
+                                    <!-- Botão de submit -->
+                                    <button type="submit" class="btn btn-primary">
+                                        Salvar Horário
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card border-primary">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Seus Horários Cadastrados</h5>
+                            </div>
+                            <div class="card-body">
+                                <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+                                <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+                                <div th:if="${horarios == null || horarios.empty}">
+                                    <p>Nenhum horário cadastrado.</p>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped" th:if="${horarios != null && !horarios.empty}">
+                                        <thead>
+                                            <tr>
+                                                <th>Evento</th>
+                                                <th>Dia da Semana</th>
+                                                <th>Início</th>
+                                                <th>Fim</th>
+                                                <th>Ação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="h : ${horarios}">
+                                                <td th:text="${h.nomeEvento}">Aula de Matemática</td>
+                                                <td th:text="${h.diaSemana}">Segunda-feira</td>
+                                                <td th:text="${h.horaInicio}">08:00</td>
+                                                <td th:text="${h.horaFim}">10:00</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-danger"
+                                                        th:href="@{/horario/excluir/{id}(id=${h.id_horario})}"
+                                                        onclick="return confirm('Tem certeza que deseja excluir este horário?');">
+                                                        Excluir
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        feather.replace();
+        // Inicialização do calendário FullCalendar
+        document.addEventListener("DOMContentLoaded", function () {
+            // Elemento do calendário
+            const calendarEl = document.getElementById("calendar");
+
+            // Configuração do calendário
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: "dayGridMonth",
+                headerToolbar: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: "dayGridMonth,timeGridWeek,timeGridDay",
+                },
+                // Eventos do calendário substituír por dados dinâmicos do backend
+                events: [
+                    {
+                        title: "Aula de Matemática",
+                        start: new Date(),
+                        end: new Date(new Date().setHours(new Date().getHours() + 2)),
+                    },
+                ],
+                locale: "pt-br",
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+
+</html>
