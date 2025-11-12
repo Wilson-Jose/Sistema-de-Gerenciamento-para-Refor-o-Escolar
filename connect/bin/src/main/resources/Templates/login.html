@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title>
+    <title>Login do Professor - Connect</title>
     <style>
-        /* Estilos gerais */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f2f5;
@@ -16,143 +15,100 @@
             margin: 0;
         }
 
-        /* Container principal do formulário */
-        .form-container {
+        .login-container {
             background-color: #ffffff;
-            padding: 40px;
+            padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            box-sizing: border-box; /* Garante que padding não afete a largura */
-        }
-
-        h2 {
+            width: 300px;
             text-align: center;
-            color: #333;
-            margin-bottom: 25px;
         }
 
-        /* Estilo para os grupos de formulário (label + input) */
-        .input-group {
-            margin-bottom: 15px;
+        .login-container h1 {
+            color: #28a745; /* Cor verde para "Connect" */
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
         }
 
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        .input-group input {
+        .login-form input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
             border-radius: 4px;
-            box-sizing: border-box; /* Garante que padding não afete a largura total */
+            box-sizing: border-box; 
         }
-        
-        /* NOVO CSS ADICIONADO */
-        .input-extra {
-            display: flex;
-            align-items: center;
-            margin-top: -5px; /* Puxa para mais perto do campo de senha */
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        .input-extra label {
-            margin-left: 5px;
-            color: #555;
-            font-weight: normal; /* Sobrescreve o bold dos outros labels */
-        }
-        /* FIM DO NOVO CSS */
 
-        /* Estilo dos botões */
-        button {
+        .login-form button {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
+            background-color: #28a745; /* Cor verde */
+            color: white;
             border: none;
             border-radius: 4px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .login-form button:hover {
+            background-color: #218838;
         }
 
-        /* Link de "Esqueceu a senha?" e "Cadastre-se" */
-        .links-uteis {
-            margin-top: 15px;
+        .error-message {
+            color: #d93025;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 1rem;
             text-align: center;
-            font-size: 14px;
+        }
+        
+        .footer-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .links-uteis a {
+        .footer-links a {
             color: #007bff;
             text-decoration: none;
-            display: block; /* Faz cada link ocupar uma linha */
-            margin-top: 10px;
+            font-size: 0.9rem;
         }
-
-        .links-uteis a:hover {
+        
+        .footer-links a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        
-        <form action="/logar" method="POST">
-            <h2>Login</h2>
-            <div class="input-group">
-                <label for="email-eae">Email</label>
-                <input type="text" id="email-eae" name="email_Professor">
-            </div>
-            <div class="input-group">
-                <label for="senha-eae">Senha</label>
-                <input type="password" id="senha-eae" name="senha_Professor">
-            </div>
+    <div class="login-container">
+        <h1>Connect</h1>
+        <p>Acesso do Professor</p>
 
-            <div class="input-extra">
-                <input type="checkbox" id="mostrar-senha">
-                <label for="mostrar-senha">Mostrar Senha</label>
+        <form class="login-form" th:action="@{/logar}" method="post">
+            <div>
+                <input type="text" name="email_Professor" placeholder="Email do Professor" required>
             </div>
-
-            <button type="submit">Entrar</button>
-            <div class="links-uteis">
-                <a href="#">Esqueceu sua senha?</a>
-                <a href="/cadastroProf">Não tem uma conta? Cadastre-se</a>
+            <div>
+                <input type="password" name="senha_Professor" placeholder="Senha" required>
             </div>
-			<div th:if="${erro != null}" th.text="${erro}"></div>
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
         </form>
 
-    </div>
+        <div th:if="${erro}" class="error-message">
+            <span th:text="${erro}"></span>
+        </div>
+        
+		<div class="footer-links">
+		            <a th:href="@{/cadastroProf}">Cadastrar-se</a>
+		            
+		            <a th:href="@{/sairProf}">Sair (Voltar)</a>
+		            </div>
+		    </div>
 
-    <script>
-        // 1. Pega os elementos que vamos usar (o checkbox e o campo de senha)
-        const toggleSenha = document.getElementById('mostrar-senha');
-        const inputSenha = document.getElementById('senha-eae');
-
-        // 2. Adiciona um "ouvinte" que reage a cliques no checkbox
-        toggleSenha.addEventListener('click', function() {
-            
-            // 3. Verifica se a caixa está marcada
-            if (toggleSenha.checked) {
-                // Se sim, muda o tipo do input para 'text' (mostra a senha)
-                inputSenha.type = 'text';
-            } else {
-                // Se não, volta o tipo para 'password' (oculta a senha)
-                inputSenha.type = 'password';
-            }
-        });
-    </script>
-
-</body>
-</html>
+		</body>
+		</html>
