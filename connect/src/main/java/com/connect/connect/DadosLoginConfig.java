@@ -20,7 +20,7 @@ public class DadosLoginConfig {
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/connect?useTimezone=true&serverTimezone=UTC&createDatabaseIfNotExist=true");
 		dataSource.setUsername("root");
-		dataSource.setPassword("123456");
+		dataSource.setPassword("27032005");
 		return dataSource;
 	}
 	

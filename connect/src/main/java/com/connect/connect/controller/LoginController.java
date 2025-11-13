@@ -31,10 +31,10 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/home")
 	public String index(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 		model.addAttribute("nome",CookieService.getCookie(request, "professorNome"));
-		return "index";
+		return "home";
 	}
 	@PostMapping("/logar")
 	public String loginProf(Professor professor, Model model, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -43,7 +43,7 @@ public class LoginController {
 			CookieService.setCookie(response, "professorId", String.valueOf(profLogado.getCod_Professor()), 10000);
 			CookieService.setCookie(response, "professorNome", String.valueOf(profLogado.getNome_Professor()), 10000);
 			
-			return "redirect:/index";
+			return "redirect:/home";
 		}
 		model.addAttribute("erro", "Usuario invalido!");
 		return "/login";
