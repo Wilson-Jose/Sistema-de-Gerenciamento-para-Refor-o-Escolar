@@ -1,0 +1,21 @@
+{
+  "name": "reforco-escolar-backend",
+  "version": "1.0.0",
+  "description": "Backend para o Sistema de Gerenciamento de Reforço Escolar",
+  "main": "index.js",
+  "scripts": {
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
