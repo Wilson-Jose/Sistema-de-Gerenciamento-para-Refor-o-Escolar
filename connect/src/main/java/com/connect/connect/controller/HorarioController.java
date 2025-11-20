@@ -8,6 +8,7 @@ import java.util.Map;   // Importar Map
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -153,7 +154,7 @@ public class HorarioController {
 
     @GetMapping("/horario/excluir/{id_horario}")
     public String excluirHorario(
-            @PathVariable("id_horario") Long id_horario,
+            @PathVariable("id_horario") @NonNull Long id_horario,
             HttpServletRequest request,
             RedirectAttributes redirectAttributes) throws UnsupportedEncodingException {
 
