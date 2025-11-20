@@ -1,6 +1,5 @@
 package com.connect.connect.service.autenticator;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,22 +17,24 @@ public class LoginInterceptorAppConfig implements WebMvcConfigurer{
 		registry.addInterceptor(logininterceptor)
             .excludePathPatterns(
 
+                "/components/styles/bootstrap.min.css",
+                "/components/styles/styles.css",
+                "/components/scripts/bootstrap.bundle.min.js", 
+
+
                 "/",
                 "/logarInstituicao",
                 "/cadastroInstituicao", 
                 "/salvarInstituicao",   
             
-
                 "/login",
                 "/logar",
                 "/cadastroProf",
                 
-
                 "/sair",
                 "/sairProf", 
                 
-
-                "error",
+                "/error",
                 "/horarioProf"
             )
             .order(1); 

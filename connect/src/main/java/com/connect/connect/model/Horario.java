@@ -30,6 +30,10 @@ public class Horario {
     @NotEmpty(message = "A hora de fim é obrigatória")
     private String horaFim;
 
+    
+    @NotEmpty(message = "A Materia é Obrigatoria")
+    private String nomeEvento;
+    
     @ManyToOne
     @JoinColumn(name = "cod_Professor") 
     private Professor professor;
@@ -75,4 +79,14 @@ public class Horario {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
+	public String getNomeEvento() {
+		return nomeEvento;
+	}
+
+	public void setNomeEvento(String nomeEvento) {
+		this.nomeEvento = nomeEvento;
+	}
+    
+    
 }

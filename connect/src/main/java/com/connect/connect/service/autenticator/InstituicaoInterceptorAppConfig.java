@@ -16,6 +16,11 @@ public class InstituicaoInterceptorAppConfig implements WebMvcConfigurer {
         registry.addInterceptor(instituicaoLoginInterceptor)
                 .addPathPatterns("/**") 
                 .excludePathPatterns(
+                   "/components/styles/bootstrap.min.css",
+                   "/components/styles/styles.css",
+                   "/components/scripts/bootstrap.bundle.min.js", 
+                         
+
                     "/", 
                     "/logarInstituicao", 
                     "/cadastroInstituicao", 
@@ -24,10 +29,8 @@ public class InstituicaoInterceptorAppConfig implements WebMvcConfigurer {
                     "/sair",
                     "/sairProf", 
                     
-
                     "/error",
                     "/horarioProf" 
-
                 ) 
                 .order(0); 
     }

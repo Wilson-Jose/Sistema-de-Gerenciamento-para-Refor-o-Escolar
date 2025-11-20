@@ -6,7 +6,7 @@
     <title>Academia Dashboard</title>
 
     <link th:href="@{/components/styles/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/components/styles/styles.css}" rel="stylesheet">
+    
     <script src="https://unpkg.com/feather-icons"></script> 
 </head>
 
@@ -16,7 +16,7 @@
             
             <a class="navbar-brand fw-bold" th:href="@{/index}">Bem Vindo(a) <span th:text="${nome}"></span></a>
             
-            <a th:href="@{/}" class="btn btn-danger rounded-circle p-2 ms-auto">
+            <a th:href="@{/sair}" class="btn btn-danger rounded-circle p-2 ms-auto">
                 <i data-feather="log-out"></i>
             </a>
         </div>

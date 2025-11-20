@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ConnectApplication<connect>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.connect.connect.ConnectApplication",
+            "projectName": "connect",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

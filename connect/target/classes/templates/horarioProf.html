@@ -16,9 +16,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
         <div class="container">
             
-            <a class="navbar-brand fw-bold" th:href="@{/index}">Bem Vindo(a) <span th:text="${nome}"></span></a>
+            <a class="navbar-brand fw-bold" th:href="@{/home}">Bem Vindo(a) <span th:text="${nome}"></span></a>
             
-            <a th:href="@{/index}" class="btn btn-danger rounded-pill px-4 fw-bold">Voltar</a>
+            <a th:href="@{/home}" class="btn btn-danger rounded-pill px-4 fw-bold">Voltar</a>
             
         </div>
     </nav>
@@ -45,39 +45,39 @@
                                         <label for="nomeEvento" class="form-label">Nome do Evento</label>
                                         <input type="text" class="form-control" id="nomeEvento" th:field="*{nomeEvento}"
                                             placeholder="Ex: Aula de Matemática" />
-                                        <span class="error" th:if="${#fields.hasErrors('nomeEvento')}"
-                                            th:errors="*{nomeEvento}"></span>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('nomeEvento')}"
+                                            th:errors="*{nomeEvento}"></div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Dia da Semana</label>
                                         <select class="form-select" id="diaSemana" th:field="*{diaSemana}">
                                             <option value="">Selecione...</option>
+                                            <option value="Domingo">Domingo</option>
                                             <option value="Segunda-feira">Segunda-feira</option>
                                             <option value="Terça-feira">Terça-feira</option>
                                             <option value="Quarta-feira">Quarta-feira</option>
                                             <option value="Quinta-feira">Quinta-feira</option>
                                             <option value="Sexta-feira">Sexta-feira</option>
                                             <option value="Sábado">Sábado</option>
-                                            <option value="Domingo">Domingo</option>
                                         </select>
-                                        <span class="error" th:if="${#fields.hasErrors('diaSemana')}"
-                                            th:errors="*{diaSemana}"></span>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('diaSemana')}"
+                                            th:errors="*{diaSemana}"></div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Hora de Início</label>
                                         <input type="time" class="form-control" id="horaInicio"
                                             th:field="*{horaInicio}" />
-                                        <span class="error" th:if="${#fields.hasErrors('horaInicio')}"
-                                            th:errors="*{horaInicio}"></span>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('horaInicio')}"
+                                            th:errors="*{horaInicio}"></div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Hora de Fim</label>
                                         <input type="time" class="form-control" id="horaFim" th:field="*{horaFim}" />
-                                        <span class="error" th:if="${#fields.hasErrors('horaFim')}"
-                                            th:errors="*{horaFim}"></span>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('horaFim')}"
+                                            th:errors="*{horaFim}"></div>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">
@@ -137,30 +137,42 @@
         </div>
     </main>
 
-    <script>
+    <script th:inline="javascript">
         feather.replace();
+        
         // Inicialização do calendário FullCalendar
         document.addEventListener("DOMContentLoaded", function () {
             // Elemento do calendário
             const calendarEl = document.getElementById("calendar");
 
+            // --- NOVO: Pega a string JSON do modelo Thymeleaf ---
+            // Usamos /*[[...]]*/ para o Thymeleaf processar e '[]' como fallback
+            const eventsJson = /*[[${eventsJson}]]*/ '[]';
+
             // Configuração do calendário
             const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: "dayGridMonth",
+                
+                // --- MUDADO: Alterado para 'timeGridWeek' para mostrar a semana ---
+                initialView: "timeGridWeek", 
+                
                 headerToolbar: {
                     left: "prev,next today",
                     center: "title",
                     right: "dayGridMonth,timeGridWeek,timeGridDay",
                 },
-                // Eventos do calendário (substituir por dados dinâmicos do backend)
-                events: [
-                    {
-                        title: "Aula de Matemática",
-                        start: new Date(),
-                        end: new Date(new Date().setHours(new Date().getHours() + 2)),
-                    },
-                ],
-                locale: "pt-br",
+
+                // --- MUDADO: Carrega os eventos do nosso JSON ---
+                // JSON.parse() converte a string JSON de volta para um objeto JavaScript
+                events: JSON.parse(eventsJson),
+
+                locale: "pt-br", // Define o idioma para português
+                
+                // --- Opcional: Esconde o "all-day" pois estamos a usar horários
+                allDaySlot: false, 
+                
+                // --- Opcional: Define um horário de início e fim para a grade
+                slotMinTime: "07:00:00", 
+                slotMaxTime: "22:00:00",
             });
             calendar.render();
         });
