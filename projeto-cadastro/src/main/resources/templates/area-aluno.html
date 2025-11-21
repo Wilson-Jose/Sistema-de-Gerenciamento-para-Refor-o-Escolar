@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Aluno</title>
-    <link href="components/styles/bootstrap.min.css" rel="stylesheet">
+   <link th:href="@{/components/styles/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/components/styles/styles.css}" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
    <!-- <link rel="stylesheet" href="components/styles/styles.css"> -->
 </head>
@@ -61,18 +62,11 @@
         </div>
         </div>
     </main>
-    <script src="components/scripts/bootstrap.bundle.min.js"></script>
-    <script src="components/scripts/navbar.js"></script>
-    <script>
-        feather.replace();
-        
-        // Search functionality
-        document.querySelector('input[type="text"]').addEventListener('keyup', function(e) {
-            if(e.key === 'Enter') {
-                // Implement search functionality here
-                console.log('Searching for:', this.value);
-            }
-        });
+    <script th:src="@{/components/scripts/bootstrap.bundle.min.js}"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+    feather.replace();
+</script>
     </script>
 </body>
 </html>
