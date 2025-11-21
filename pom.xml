@@ -10,14 +10,15 @@
 		<relativePath/> 
 	</parent>
 	
-	<groupId>com.escola</groupId>
-	<artifactId>reforco-escolar</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>projeto-cadastro</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>reforco-escolar</name>
+	<name>projeto-cadastro</name>
 	<description>Sistema de Gerenciamento Escolar</description>
 
 	<properties>
-		<java.version>17</java.version> </properties>
+		<java.version>17</java.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -34,6 +35,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
@@ -62,4 +64,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
