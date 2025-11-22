@@ -4,8 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Professor {
@@ -14,19 +19,27 @@ public class Professor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cod_Professor;
 	
-	@NotEmpty
+	
+	@NotEmpty(message = "O nome é obrigatório.")
+	@Pattern(regexp = "^[A-Za-zÁ-ÖØ-öø-ÿ\\s]+$", message = "O nome deve conter apenas letras")
 	private String nome_Professor;
 	
-	@NotEmpty
+	@NotEmpty(message = "O CPF é obrigatório")
+	@Size(min = 11, max = 11, message = "O CPF deve conter apenas 11 numeros")
+	@Pattern(regexp = "\\d+", message = "O CPF não deve conter letras")
 	private String cpf_Professor;
 	
-	@NotEmpty
+	@NotEmpty(message = "O email é obrigatorio")
+	@Email(message = "O Email deve ser válido")
 	private String email_Professor;
 	
-	@NotNull
+	@NotNull(message = "O telefone é obrigatorio")
+	@Min(value = 1000000000L, message = "O numero deve ter pelo menos 10 digitos (DDD + numero)")
+	@Max(value = 99999999999L,  message = "O numero deve ter no maximo 11 digitos (DDD + numero)")
 	private long telefone_Professor;
 
-	@NotEmpty
+	@NotEmpty(message = "A senha é obrigatorio")
+	@Size(min = 6, message = "A senha deve ter no minimo 6 caracteres.")
 	private String senha_Professor;
 	
 	public String getNome_Professor() {

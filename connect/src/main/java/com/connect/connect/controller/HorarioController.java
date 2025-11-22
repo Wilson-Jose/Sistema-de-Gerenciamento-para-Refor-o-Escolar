@@ -36,10 +36,7 @@ public class HorarioController {
     @Autowired
     private RepositorioProfessor repositorioProfessor;
 
-    /**
-     * Helper para converter o dia da semana em um número para o FullCalendar
-     * (Domingo=0, Segunda=1, ..., Sábado=6)
-     */
+
     private int convertDayToInteger(String diaSemana) {
         switch (diaSemana) {
             case "Domingo": return 0;
@@ -49,13 +46,11 @@ public class HorarioController {
             case "Quinta-feira": return 4;
             case "Sexta-feira": return 5;
             case "Sábado": return 6;
-            default: return 0; // Padrão
+            default: return 0; 
         }
     }
 
-    /**
-     * Helper para preparar os eventos para o FullCalendar
-     */
+
     private String prepararEventosJson(List<Horario> horarios) {
         ObjectMapper mapper = new ObjectMapper();
         List<Map<String, Object>> eventList = new ArrayList<>();
@@ -66,16 +61,16 @@ public class HorarioController {
             event.put("daysOfWeek", new int[] { convertDayToInteger(h.getDiaSemana()) });
             event.put("startTime", h.getHoraInicio());
             event.put("endTime", h.getHoraFim());
-            // Adiciona um ID para poder clicar ou identificar
+
             event.put("id", h.getId_horario()); 
             eventList.add(event);
         }
 
         try {
-            // Converte a lista de eventos para uma string JSON
+
             return mapper.writeValueAsString(eventList);
         } catch (JsonProcessingException e) {
-            // Em caso de erro, retorna um array JSON vazio
+
             return "[]";
         }
     }
@@ -98,16 +93,16 @@ public class HorarioController {
 
         List<Horario> horarios = repositorioHorario.findByProfessor(professor);
 
-        // --- NOVO: Preparar JSON para o FullCalendar ---
+
         String eventsJson = prepararEventosJson(horarios);
         
         model.addAttribute("horario", new Horario());
         model.addAttribute("horarios", horarios);
         
-        // --- NOVO: Passar o JSON para o modelo ---
+
         model.addAttribute("eventsJson", eventsJson); 
 
-        // --- CORRIGIDO: Mudar "professorNome" para "nome" ---
+
         model.addAttribute("nome", CookieService.getCookie(request, "professorNome"));
 
         return "horarioProf";
@@ -130,20 +125,20 @@ public class HorarioController {
         }
 
         if (result.hasErrors()) {
-            // Se houver erros, precisamos carregar os dados da página novamente
+
 
             List<Horario> horarios = repositorioHorario.findByProfessor(professor);
             
-            // --- NOVO: Preparar JSON para o FullCalendar (também no caso de erro) ---
+
             String eventsJson = prepararEventosJson(horarios);
             model.addAttribute("eventsJson", eventsJson);
 
             model.addAttribute("horarios", horarios);
             
-            // --- CORRIGIDO: Mudar "professorNome" para "nome" ---
+
             model.addAttribute("nome", CookieService.getCookie(request, "professorNome"));
 
-            return "horarioProf"; // Retorna para a página com os erros de validação
+            return "horarioProf"; 
         }
 
         horario.setProfessor(professor);

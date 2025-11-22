@@ -3,112 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login do Professor - Connect</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .login-container {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-
-        .login-container h1 {
-            color: #28a745; /* Cor verde para "Connect" */
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .login-form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; 
-        }
-
-        .login-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745; /* Cor verde */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .login-form button:hover {
-            background-color: #218838;
-        }
-
-        .error-message {
-            color: #d93025;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 1rem;
-            text-align: center;
-        }
-        
-        .footer-links {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .footer-links a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Login - Academia Dashboard</title>
+    <link th:href="@{/components/styles/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/components/styles/styles.css}" rel="stylesheet">
+    <script th:src="@{/components/scripts/bootstrap.bundle.min.js}"></script>
 </head>
-<body>
-
+<body class="login-body">
     <div class="login-container">
-        <h1>Connect</h1>
-        <p>Acesso do Professor</p>
-
-        <form class="login-form" th:action="@{/logar}" method="post">
-            <div>
-                <input type="text" name="email_Professor" placeholder="Email do Professor" required>
-            </div>
-            <div>
-                <input type="password" name="senha_Professor" placeholder="Senha" required>
-            </div>
-            <div>
-                <button type="submit">Entrar</button>
-            </div>
-        </form>
-
-        <div th:if="${erro}" class="error-message">
+        <div class="login-card">
+            <h1 class="login-title">Bem Vindo(a)</h1>
+            
+            <form id="loginForm" th:action="@{/logar}" method="post">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" name="email_Professor" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" name="senha_Professor" class="form-control" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary login-button">ACESSAR CONTA</button>
+                
+                <a href="#" class="recovery-link">Recuperar Acesso</a>
+                <a class="recovery-link" th:href="@{/cadastroProf}">Cadastrar-se</a>
+		    </div>
+            </form>
+            
+        </div>
+    </div>
+         <div th:if="${erro}" class="error-message">
             <span th:text="${erro}"></span>
         </div>
-        
-		<div class="footer-links">
-		            <a th:href="@{/cadastroProf}">Cadastrar-se</a>
-		            
-		            <a th:href="@{/sairProf}">Sair (Voltar)</a>
-		            </div>
-		    </div>
-
-		</body>
-		</html>
+</body>
+</html>

@@ -18,7 +18,8 @@ public class InstituicaoInterceptorAppConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                    "/components/styles/bootstrap.min.css",
                    "/components/styles/styles.css",
-                   "/components/scripts/bootstrap.bundle.min.js", 
+                   "/components/scripts/bootstrap.bundle.min.js",
+                   "/components/styles/error.css",
                          
 
                     "/", 

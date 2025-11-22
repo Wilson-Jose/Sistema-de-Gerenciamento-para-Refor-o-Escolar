@@ -20,6 +20,7 @@ public class LoginInterceptorAppConfig implements WebMvcConfigurer{
                 "/components/styles/bootstrap.min.css",
                 "/components/styles/styles.css",
                 "/components/scripts/bootstrap.bundle.min.js", 
+                "/components/styles/error.css",
 
 
                 "/",

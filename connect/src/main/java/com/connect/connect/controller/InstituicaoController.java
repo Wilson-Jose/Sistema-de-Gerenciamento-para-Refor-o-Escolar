@@ -11,6 +11,8 @@ import com.connect.connect.model.InstituicaoUser;
 import com.connect.connect.repository.RepositorioInstituicao;
 import com.connect.connect.service.CookieService;
 
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
@@ -23,7 +25,10 @@ public class InstituicaoController {
     
     
     @GetMapping("/")
-    public String loginInstituicaoPage() {
+    public String loginInstituicaoPage(HttpServletRequest request) throws UnsupportedEncodingException {
+    	if (CookieService.getCookie(request, "instituicaoId") != null) {
+    		return "redirect:/login";
+    	}
         return "loginInstituicao"; 
     }
 
