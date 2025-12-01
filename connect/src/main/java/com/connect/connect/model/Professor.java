@@ -1,5 +1,6 @@
 	package com.connect.connect.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ import jakarta.validation.constraints.Size;
 public class Professor {
 
 	@Id
+	@Column(unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cod_Professor;
 	
@@ -25,11 +27,13 @@ public class Professor {
 	private String nome_Professor;
 	
 	@NotEmpty(message = "O CPF é obrigatório")
+	@Column(unique = true)
 	@Size(min = 11, max = 11, message = "O CPF deve conter apenas 11 numeros")
 	@Pattern(regexp = "\\d+", message = "O CPF não deve conter letras")
 	private String cpf_Professor;
 	
 	@NotEmpty(message = "O email é obrigatorio")
+	@Column(unique = true)
 	@Email(message = "O Email deve ser válido")
 	private String email_Professor;
 	

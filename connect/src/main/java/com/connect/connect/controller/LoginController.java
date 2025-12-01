@@ -4,7 +4,8 @@ import java.io.UnsupportedEncodingException;
 
 
 
-import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -76,14 +77,17 @@ public class LoginController {
 	}
 	
 	@PostMapping("/cadastroProf")
-	public String cadastroProfessor(@Valid Professor professor, BindingResult result) {
+	public String cadastroProfessor(@Valid Professor professor, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
 			return "cadastro"; 
 		}
-		
+		try {
 		ur.save(professor);
-		
 		return "redirect:/login"; 
+		} catch (DataIntegrityViolationException e) {
+			model.addAttribute("erro", "Cadastro falhou: O CPF ou Email já está cadastrado no sistema.");
+			return "cadastro";
+		}
 	}
 }

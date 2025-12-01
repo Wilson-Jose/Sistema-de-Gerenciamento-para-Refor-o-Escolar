@@ -18,7 +18,7 @@ public class Horario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id") 
+	@Column(name = "id", unique = true) 
 	private Long id_horario;
 
     @NotEmpty(message = "O dia da semana é obrigatório")

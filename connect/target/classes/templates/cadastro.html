@@ -102,6 +102,9 @@
         
         <form id="cadastro-form" method="post">
             <h2>Cadastro</h2>
+			<div th:if="${erro}" style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; margin-bottom: 15px; text-align: center;">
+			        <span th:text="${erro}"></span>
+			    </div>
             <div class="input-group">
                 <label for="cadastro-nome">Nome Completo</label>
                 <input type="text" id="cadastro-nome" name="nome_Professor" required>
