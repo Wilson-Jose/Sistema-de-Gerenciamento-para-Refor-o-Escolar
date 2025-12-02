@@ -3,105 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/components/styles/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/components/styles/styles.css}" rel="stylesheet">
     <title>Página de Cadastro</title>
     <style>
-        /* NOTA: Em um projeto real, este CSS seria colocado em um 
-           arquivo .css separado (ex: "estilos.css") e importado 
-           nas duas páginas, evitando duplicação. 
-           Mas para simplificar, ele está copiado aqui.
-        */
-        
-        /* Estilos gerais */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
 
-        /* Container principal do formulário */
-        .form-container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            box-sizing: border-box; /* Garante que padding não afete a largura */
-        }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-        }
-
-        /* Estilo para os grupos de formulário (label + input) */
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Garante que padding não afete a largura total */
-        }
-
-        /* Estilo dos botões */
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            background-color: #28a745; /* Cor verde para cadastro */
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        /* Link para "Fazer Login" */
-        .links-uteis {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .links-uteis a {
-            color: #007bff;
-            text-decoration: none;
-            display: block; /* Faz o link ocupar uma linha */
-            margin-top: 10px;
-        }
-
-        .links-uteis a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
-<body>
+<body class="cadastro-body">
 
-    <div class="form-container">
+    <div class="formCad-container">
         
         <form id="cadastro-form" method="post">
-            <h2>Cadastro</h2>
+            <h2 class="h2cad">Novo Professor</h2>
 			<div th:if="${erro}" style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; margin-bottom: 15px; text-align: center;">
 			        <span th:text="${erro}"></span>
 			    </div>
@@ -118,20 +33,21 @@
 			    <input type="text" id="cadastro-email" name="cpf_Professor" required>
 			</div>
 			<div class="input-group">
-			    <label for="cadastro-email">telefone</label>
+			    <label for="cadastro-email">Telefone</label>
 			    <input type="text" id="cadastro-email" name="telefone_Professor" required>
 			</div>
             <div class="input-group">
                 <label for="cadastro-senha">Senha</label>
                 <input type="text" id="cadastro-senha" name="senha_Professor" required>
             </div>
-            <button type="submit">Criar Conta</button>
+            <button class="createA" type="submit">Criar Conta</button>
             <div class="links-uteis">
                 <a href="/login">Já tem uma conta? Faça login</a>
             </div>
         </form>
 
     </div>
-
+    <div th:if="${erro}" class="error-message">
+        <span th:text="${erro}"></span>
 </body>
 </html>

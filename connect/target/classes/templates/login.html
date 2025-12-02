@@ -8,28 +8,36 @@
     <link th:href="@{/components/styles/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/components/styles/styles.css}" rel="stylesheet">
     <script th:src="@{/components/scripts/bootstrap.bundle.min.js}"></script>
+
+    <style>
+        body {
+            background-color: #f0f2f5;       
+        }
+    </style>
 </head>
 
 <body class="login-body">
     <div class="login-container">
         <div class="login-card">
-            <h1 class="login-title">Bem Vindo(a)</h1>
+            <h1 class="login-title">Perfil do Professor</h1>
 
             <form id="loginForm" th:action="@{/logar}" method="post">
                 <div class="form-group">
-                    <label for="username">Usuário</label>
+                    <label for="username"><b>Email</b></label>
                     <input type="text" name="email_Professor" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Senha</label>
+                    <label for="password"><b>Senha</b></label>
                     <input type="password" name="senha_Professor" class="form-control" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary login-button">ACESSAR CONTA</button>
 
-                <a th:href="@{/sairProf}" class="btn btn-primary exit">Sair</a>
-                <a class="btn btn-primary cad" th:href="@{/cadastroProf}">Cadastrar-se</a>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                <a class="btn btn-outline-danger exit-sm" th:href="@{/sairProf}">Sair</a>
+                <a class="btn btn-outline-info cad-sm" th:href="@{/cadastroProf}">Cadastrar-se</a>
+                </div>
         </div>
         </form>
 
