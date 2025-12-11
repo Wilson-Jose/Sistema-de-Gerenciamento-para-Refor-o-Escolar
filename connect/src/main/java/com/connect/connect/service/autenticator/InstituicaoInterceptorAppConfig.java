@@ -16,20 +16,39 @@ public class InstituicaoInterceptorAppConfig implements WebMvcConfigurer {
         registry.addInterceptor(instituicaoLoginInterceptor)
                 .addPathPatterns("/**") 
                 .excludePathPatterns(
-                   "/components/styles/bootstrap.min.css",
-                   "/components/styles/styles.css",
-                   "/components/scripts/bootstrap.bundle.min.js",
-                   "/components/styles/error.css",
-                         
+                    // Estilos e Scripts
+                    "/components/styles/bootstrap.min.css",
+                    "/components/styles/styles.css",
+                    "/components/scripts/bootstrap.bundle.min.js",
+                    "/components/styles/error.css",
+                    "/styles/**", "/images/**", "/scripts/**", // Adicionei genéricos para garantir
 
+                    // Rotas Instituição/Home
                     "/", 
+                    "/home", // Adicionei home se for pública
                     "/logarInstituicao", 
                     "/cadastroInstituicao", 
                     "/salvarInstituicao",   
                     
+                    // Rotas Professor
+                    "/login",
+                    "/logar",
+                    "/login-prof",
+                    "/logar-prof",
+                    "/cadastroProf",
+                    "/cadastro-prof",
+                    "/salvar-prof",
                     "/sair",
                     "/sairProf", 
                     
+                    // --- ROTAS DE ALUNO (NOVAS) ---
+                    "/cadastrar-aluno", // <--- LIBERADO
+                    "/salvar-aluno",    // <--- LIBERADO
+                    "/login-aluno",     // <--- LIBERADO
+                    "/logar-aluno",     // <--- LIBERADO
+                    "/sair-aluno",      // <--- LIBERADO
+                    
+                    // Outros
                     "/error",
                     "/horarioProf" 
                 ) 

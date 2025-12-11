@@ -13,10 +13,6 @@ public class SiteController {
 		return "cadAluno";
 	}
 
-	@GetMapping("/area-aluno")
-	public String areadoAluno() {
-		return "area-aluno";
-	}
 
 	@GetMapping("/exportFicha")
 	public String exportarficha() {

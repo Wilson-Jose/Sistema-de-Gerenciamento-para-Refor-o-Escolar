@@ -1,14 +1,13 @@
 package com.connect.connect.repository;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-
 import com.connect.connect.model.Professor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface RepositorioProfessor extends CrudRepository<Professor, Long> {
-
-	Professor findById(long cod_Professor);
-	
-	@Query(value="select * from  connect.professor where email_Professor = :email_Professor and senha_Professor = :senha_Professor", nativeQuery = true)
-	public Professor login(String email_Professor, String senha_Professor); 
+@Repository
+public interface RepositorioProfessor extends JpaRepository<Professor, Long> {
+    
+    @Query(value = "SELECT * FROM professor WHERE email_professor = :email AND senha_professor = :senha", nativeQuery = true)
+    Professor login(String email, String senha);
 }

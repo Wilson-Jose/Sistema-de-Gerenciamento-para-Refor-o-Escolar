@@ -22,20 +22,20 @@ import com.connect.connect.model.Professor;
 import com.connect.connect.repository.RepositorioHorario;
 import com.connect.connect.repository.RepositorioProfessor;
 import com.connect.connect.service.CookieService;
-import com.fasterxml.jackson.core.JsonProcessingException; // Importar Jackson
-import com.fasterxml.jackson.databind.ObjectMapper;     // Importar Jackson
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
 public class HorarioController {
+
     @Autowired
     private RepositorioHorario repositorioHorario;
 
     @Autowired
     private RepositorioProfessor repositorioProfessor;
-
 
     private int convertDayToInteger(String diaSemana) {
         switch (diaSemana) {
@@ -50,7 +50,6 @@ public class HorarioController {
         }
     }
 
-
     private String prepararEventosJson(List<Horario> horarios) {
         ObjectMapper mapper = new ObjectMapper();
         List<Map<String, Object>> eventList = new ArrayList<>();
@@ -61,16 +60,13 @@ public class HorarioController {
             event.put("daysOfWeek", new int[] { convertDayToInteger(h.getDiaSemana()) });
             event.put("startTime", h.getHoraInicio());
             event.put("endTime", h.getHoraFim());
-
             event.put("id", h.getId_horario()); 
             eventList.add(event);
         }
 
         try {
-
             return mapper.writeValueAsString(eventList);
         } catch (JsonProcessingException e) {
-
             return "[]";
         }
     }
@@ -80,29 +76,26 @@ public class HorarioController {
 
         String profIdCookie = CookieService.getCookie(request, "professorId");
 
-        if (profIdCookie == null) {
-            return "redirect:/login";
+        if (profIdCookie == null || profIdCookie.isEmpty()) {
+            return "redirect:/login-prof"; // Redireciona para o login correto
         }
 
         long profId = Long.parseLong(profIdCookie);
-        Professor professor = repositorioProfessor.findById(profId);
+        
+        // CORREÇÃO AQUI: Trocamos 'id' por 'profId' e usamos orElse(null)
+        Professor professor = repositorioProfessor.findById(profId).orElse(null);
 
         if (professor == null) {
-            return "redirect:/login";
+            return "redirect:/login-prof";
         }
 
         List<Horario> horarios = repositorioHorario.findByProfessor(professor);
-
 
         String eventsJson = prepararEventosJson(horarios);
         
         model.addAttribute("horario", new Horario());
         model.addAttribute("horarios", horarios);
-        
-
         model.addAttribute("eventsJson", eventsJson); 
-
-
         model.addAttribute("nome", CookieService.getCookie(request, "professorNome"));
 
         return "horarioProf";
@@ -113,29 +106,26 @@ public class HorarioController {
             throws UnsupportedEncodingException {
 
         String profIdCookie = CookieService.getCookie(request, "professorId");
-        if (profIdCookie == null) {
-            return "redirect:/login";
+        
+        if (profIdCookie == null || profIdCookie.isEmpty()) {
+            return "redirect:/login-prof";
         }
 
         long profId = Long.parseLong(profIdCookie);
-        Professor professor = repositorioProfessor.findById(profId); 
+        
+        // CORREÇÃO AQUI TAMBÉM: Trocamos 'id' por 'profId'
+        Professor professor = repositorioProfessor.findById(profId).orElse(null);
 
         if (professor == null) {
-            return "redirect:/login";
+            return "redirect:/login-prof";
         }
 
         if (result.hasErrors()) {
-
-
             List<Horario> horarios = repositorioHorario.findByProfessor(professor);
-            
-
             String eventsJson = prepararEventosJson(horarios);
-            model.addAttribute("eventsJson", eventsJson);
-
-            model.addAttribute("horarios", horarios);
             
-
+            model.addAttribute("eventsJson", eventsJson);
+            model.addAttribute("horarios", horarios);
             model.addAttribute("nome", CookieService.getCookie(request, "professorNome"));
 
             return "horarioProf"; 
@@ -155,7 +145,7 @@ public class HorarioController {
 
         String profIdCookie = CookieService.getCookie(request, "professorId");
         if (profIdCookie == null) {
-            return "redirect:/login";
+            return "redirect:/login-prof";
         }
 
         long profLogadoId = Long.parseLong(profIdCookie);
@@ -164,7 +154,8 @@ public class HorarioController {
         if (horarioOptional.isPresent()) {
             Horario horario = horarioOptional.get();
 
-            if (horario.getProfessor().getCod_Professor() == profLogadoId) {
+            // Verifica se o horário pertence ao professor logado
+            if (horario.getProfessor().getCod_Professor().equals(profLogadoId)) {
                 repositorioHorario.delete(horario);
                 redirectAttributes.addFlashAttribute("sucesso", "Horário excluído com sucesso!");
             } else {

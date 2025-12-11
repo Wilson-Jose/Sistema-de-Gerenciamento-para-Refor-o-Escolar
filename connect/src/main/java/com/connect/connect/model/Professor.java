@@ -1,96 +1,45 @@
-	package com.connect.connect.model;
+package com.connect.connect.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "professor")
 public class Professor {
 
-	@Id
-	@Column(unique = true)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cod_Professor;
-	
-	
-	@NotEmpty(message = "O nome é obrigatório.")
-	@Pattern(regexp = "^[A-Za-zÁ-ÖØ-öø-ÿ\\s]+$", message = "O nome deve conter apenas letras")
-	private String nome_Professor;
-	
-	@NotEmpty(message = "O CPF é obrigatório")
-	@Column(unique = true)
-	@Size(min = 11, max = 11, message = "O CPF deve conter apenas 11 numeros")
-	@Pattern(regexp = "\\d+", message = "O CPF não deve conter letras")
-	private String cpf_Professor;
-	
-	@NotEmpty(message = "O email é obrigatorio")
-	@Column(unique = true)
-	@Email(message = "O Email deve ser válido")
-	private String email_Professor;
-	
-	@NotNull(message = "O telefone é obrigatorio")
-	@Min(value = 1000000000L, message = "O numero deve ter pelo menos 10 digitos (DDD + numero)")
-	@Max(value = 99999999999L,  message = "O numero deve ter no maximo 11 digitos (DDD + numero)")
-	private long telefone_Professor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cod_Professor; // Ajustado para bater com seu controller
 
-	@NotEmpty(message = "A senha é obrigatorio")
-	@Size(min = 6, message = "A senha deve ter no minimo 6 caracteres.")
-	private String senha_Professor;
-	
-	public String getNome_Professor() {
-		return nome_Professor;
-	}
+    private String nome_Professor;
 
-	public void setNome_Professor(String nome_Professor) {
-		this.nome_Professor = nome_Professor;
-	}
+    @Column(unique = true)
+    private String email_Professor;
 
-	public String getCpf_Professor() {
-		return cpf_Professor;
-	}
+    private String senha_Professor;
+    
+    private String cpf_Professor;
+    private Long telefone_Professor;
 
-	public void setCpf_Professor(String cpf_Professor) {
-		this.cpf_Professor = cpf_Professor;
-	}
+    // --- GETTERS E SETTERS (Com o underline, para o seu Controller não quebrar) ---
 
-	public String getEmail_Professor() {
-		return email_Professor;
-	}
+    public Long getCod_Professor() { return cod_Professor; }
+    public void setCod_Professor(Long cod_Professor) { this.cod_Professor = cod_Professor; }
+    
+    // Alias para o novo controller achar (Método de compatibilidade)
+    public Long getIdProfessor() { return cod_Professor; } 
 
-	public void setEmail_Professor(String email_Professor) {
-		this.email_Professor = email_Professor;
-	}
+    public String getNome_Professor() { return nome_Professor; }
+    public void setNome_Professor(String nome_Professor) { this.nome_Professor = nome_Professor; }
 
-	public long getTelefone_Professor() {
-		return telefone_Professor;
-	}
+    public String getEmail_Professor() { return email_Professor; }
+    public void setEmail_Professor(String email_Professor) { this.email_Professor = email_Professor; }
 
-	public void setTelefone_Professor(long telefone_Professor) {
-		this.telefone_Professor = telefone_Professor;
-	}
-
-	public Long getCod_Professor() {
-		return cod_Professor;
-	}
-
-	public String getSenha_Professor() {
-		return senha_Professor;
-	}
-
-	public void setSenha_Professor(String senha_Professor) {
-		this.senha_Professor = senha_Professor;
-	}
-	
-	
-	
-	
+    public String getSenha_Professor() { return senha_Professor; }
+    public void setSenha_Professor(String senha_Professor) { this.senha_Professor = senha_Professor; }
+    
+    public String getCpf_Professor() { return cpf_Professor; }
+    public void setCpf_Professor(String cpf_Professor) { this.cpf_Professor = cpf_Professor; }
+    
+    public Long getTelefone_Professor() { return telefone_Professor; }
+    public void setTelefone_Professor(Long telefone_Professor) { this.telefone_Professor = telefone_Professor; }
 }

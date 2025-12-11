@@ -11,7 +11,6 @@ import com.connect.connect.model.InstituicaoUser;
 import com.connect.connect.repository.RepositorioInstituicao;
 import com.connect.connect.service.CookieService;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -21,17 +20,14 @@ public class InstituicaoController {
     @Autowired
     private RepositorioInstituicao instituicaoRepo;
 
-
-    
-    
     @GetMapping("/")
     public String loginInstituicaoPage(HttpServletRequest request) throws UnsupportedEncodingException {
-    	if (CookieService.getCookie(request, "instituicaoId") != null) {
-    		return "redirect:/login";
-    	}
+        // Se já tiver o cookie, joga direto para a Home (e não para o login)
+        if (CookieService.getCookie(request, "instituicaoId") != null) {
+            return "redirect:/home";
+        }
         return "loginInstituicao"; 
     }
-
 
     @PostMapping("/logarInstituicao")
     public String logarInstituicao(InstituicaoUser user, Model model, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -39,11 +35,12 @@ public class InstituicaoController {
         InstituicaoUser userLogado = this.instituicaoRepo.login(user.getEmail(), user.getSenha());
 
         if (userLogado != null) {
-
+            // Cria o cookie que dura bastante tempo (10000 segundos)
             CookieService.setCookie(response, "instituicaoId", String.valueOf(userLogado.getId()), 10000);
             
-
-            return "redirect:/login";
+            // --- CORREÇÃO PRINCIPAL AQUI ---
+            // Redireciona para a HOME (painel), não de volta para o login
+            return "redirect:/home";
         }
 
         model.addAttribute("erro", "Usuário da instituição inválido!");
